@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ColorSystem : MonoBehaviour
 {
-    public GameObject Player;
+    public GameObject player;
     public Text text;
     private Vector3 mousePosition;
     [SerializeField] private Game.Color.MyColor palette;
@@ -37,7 +37,10 @@ public class ColorSystem : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log(hit.transform.name);
-            hit.transform.GetComponent<Game.Color>().myColor = palette;
+            if (hit.transform.GetComponent<Game.Color>().canBeSet && palette != Game.Color.MyColor.NOCOLOR)
+            {
+                hit.transform.GetComponent<Game.Color>().myColor = palette;
+            }
             //text.text = palette.ToString();
         }
     }
@@ -48,15 +51,18 @@ public class ColorSystem : MonoBehaviour
         if(hit.collider != null)
         {
             Debug.Log(hit.transform.name);
-            palette = hit.transform.GetComponent<Game.Color>().myColor;
-            text.text = palette.ToString();
+            if (hit.transform.GetComponent<Game.Color>().canBeSet)
+            {
+                palette = hit.transform.GetComponent<Game.Color>().myColor;
+                text.text = palette.ToString();
+            }
         }
     }
 
     private void Hide()
     {
-        Color color = Player.GetComponent<SpriteRenderer>().color;
+        Color color = player.GetComponent<SpriteRenderer>().color;
         color.a = 0.1f;
-        Player.GetComponent<SpriteRenderer>().color = color;
+        player.GetComponent<SpriteRenderer>().color = color;
     }
 }
