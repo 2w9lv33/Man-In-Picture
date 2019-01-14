@@ -7,20 +7,26 @@ using UnityEngine.UI;
 public class ColorSystem : MonoBehaviour
 {
     public GameObject player;
+    public Animator animator;
     public Text text;
     private Vector3 mousePosition;
     [SerializeField] private Game.Color.MyColor palette;
 
     private void Update()
     {
+        animator.SetBool("Use", false);
         if (Input.GetMouseButtonDown(1))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            animator.SetBool("Use", true);
+            animator.SetBool("Using", true);
             GetColor(mousePosition);
         }
         if (Input.GetMouseButtonDown(0))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            animator.SetBool("Use", true);
+            animator.SetBool("Using", true);
             SetColor(mousePosition);
         }
         //Player.GetComponent<Game.Color>().myColor == Game.Color.MyColor.WALL
@@ -51,7 +57,7 @@ public class ColorSystem : MonoBehaviour
         if(hit.collider != null)
         {
             Debug.Log(hit.transform.name);
-            if (hit.transform.GetComponent<Game.Color>().canBeSet)
+            if (hit.transform.GetComponent<Game.Color>().canBeGet)
             {
                 palette = hit.transform.GetComponent<Game.Color>().myColor;
                 text.text = palette.ToString();
