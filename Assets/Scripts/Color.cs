@@ -8,6 +8,7 @@ namespace Game
     {
         public enum MyColor { WALL, HASCOLOR, NOCOLOR, BLACK };
         [SerializeField] private MyColor _myColor = MyColor.NOCOLOR;
+        [SerializeField] private MyColor _checkColor = MyColor.NOCOLOR;
         public MyColor myColor
         {
             get
@@ -18,6 +19,15 @@ namespace Game
             {
                 _myColor = value;
             }
+        }
+
+        public MyColor checkColor
+        {
+            get
+            {
+                return _checkColor;
+            }
+            set { }
         }
     }
 }

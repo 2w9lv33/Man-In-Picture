@@ -33,6 +33,7 @@ public class ColorSystem : MonoBehaviour
     private void SetColor(Vector3 mousePosition)
     {
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        Debug.Log("hit");
         if (hit.collider != null)
         {
             Debug.Log(hit.transform.name);
