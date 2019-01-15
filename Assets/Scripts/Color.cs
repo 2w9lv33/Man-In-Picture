@@ -12,6 +12,7 @@ namespace Game
         [SerializeField] private MyColor _myColor = MyColor.NOCOLOR;
         [SerializeField] private MyColor _checkColor = MyColor.NOCOLOR;
 
+        //get color
         public MyColor myColor
         {
             get
@@ -24,6 +25,7 @@ namespace Game
             }
         }
 
+        //check color
         public MyColor checkColor
         {
             get

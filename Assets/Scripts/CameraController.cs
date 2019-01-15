@@ -13,7 +13,6 @@ public class CameraController : MonoBehaviour
     void LookAt()
     {
         float x = follow.transform.position.x;
-        float y = follow.transform.position.y + 1.35f;
-        this.transform.position = new Vector3(x, y, -10);
+        this.transform.position = new Vector3(x, -0.95f, -10);
     }
 }

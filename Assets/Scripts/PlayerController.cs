@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchSpeed = 0.3f;
     [SerializeField] private Transform interactivePoint;
     [SerializeField] private Texture2D mouseCursor;
+    [SerializeField] public bool canBeSeen = true;
 
     private Rigidbody2D player_Rigidbody2D;
     private bool player_FacingRight = true;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         player_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    //walk
     public void Move(float move)
     {
         if(move > 0 && !player_FacingRight)
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         player_Rigidbody2D.velocity = Vector3.SmoothDamp(player_Rigidbody2D.velocity, targetVelocity, ref player_Velocity, movementSmooth);
     }
 
+    //flip player
     private void Flip()
     {
         player_FacingRight = !player_FacingRight;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
         this.transform.localScale = playerScale;
     }
 
+    //show shadow
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Light")
@@ -75,6 +79,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //close shadow
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.tag == "Light")

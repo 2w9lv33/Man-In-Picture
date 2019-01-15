@@ -9,7 +9,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float playerSpeed = 10f;
     private float moveVelocity = 0f; 
 
-	// Update is called once per frame
 	void Update () {
         moveVelocity = Input.GetAxisRaw("Horizontal") * playerSpeed;
         animator.SetFloat("Speed", Mathf.Abs(moveVelocity));
@@ -23,11 +22,21 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    //set flag finish
     public void FinishUseAbility()
     {
         animator.SetBool("Using", false);
+        Debug.Log("Finish!");
     }
 
+    //set flag start
+    public void StartUseAbility()
+    {
+        animator.SetBool("Using", true);
+        Debug.Log("Start!");
+    }
+
+    //check if go throw the door
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.name == "Door")
