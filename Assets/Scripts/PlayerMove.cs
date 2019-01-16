@@ -40,12 +40,4 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("Start!");
     }
 
-    //check if go throw the door
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.name == "Door")
-        {
-            AsynLoad.LoadSceneAsync("FirstScene");
-        }
-    }
 }

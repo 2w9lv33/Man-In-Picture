@@ -43,6 +43,21 @@ public class PlayerController : MonoBehaviour
         this.transform.localScale = playerScale;
     }
 
+    private void ChangePlayer(int type)
+    {
+        switch (type)
+        {
+            case 1:
+                transform.GetComponent<Animator>().SetLayerWeight(0, 0f);
+                transform.GetComponent<Animator>().SetLayerWeight(1, 1f);
+                break;
+            case 2:
+                transform.GetComponent<Animator>().SetLayerWeight(0, 1f);
+                transform.GetComponent<Animator>().SetLayerWeight(1, 0f);
+                break;
+        }
+    }
+
     //show shadow
     private void OnTriggerStay2D(Collider2D collision)
     {
