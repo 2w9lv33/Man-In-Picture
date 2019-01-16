@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 0.5f)] [SerializeField] private float movementSmooth = 0.1f;
-    [SerializeField] private float jumpForce = 300f;
-    [SerializeField] private float crouchSpeed = 0.3f;
     [SerializeField] private Transform interactivePoint;
     [SerializeField] private Texture2D mouseCursor;
     [SerializeField] public bool canBeSeen = true;

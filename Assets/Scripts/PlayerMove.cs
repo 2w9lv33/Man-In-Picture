@@ -20,6 +20,10 @@ public class PlayerMove : MonoBehaviour
         {
             playerController.Move(moveVelocity);
         }
+        else
+        {
+            playerController.Move(0f);
+        }
     }
 
     //set flag finish
