@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pop : MonoBehaviour
 {
     public Animator animator;
+    public Pop PlayerPop;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,19 +47,20 @@ public class Pop : MonoBehaviour
     public void ShowHelp()
     {
         transform.Find("Help").gameObject.SetActive(true);
-        //transform.Find("Key").gameObject.SetActive(true);
     }
+
     public void HideHelp()
     {
         transform.Find("Help").gameObject.SetActive(false);
-        //transform.Find("Key").gameObject.SetActive(true);
     }
+
     public void ShowKey()
     {
-        transform.Find("Key").gameObject.SetActive(true);
+        PlayerPop.transform.Find("Key").gameObject.SetActive(true);
     }
+
     public void HideKey()
     {
-        transform.Find("Key").gameObject.SetActive(false);
+        PlayerPop.transform.Find("Key").gameObject.SetActive(false);
     }
 }
