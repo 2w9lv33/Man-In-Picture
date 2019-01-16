@@ -19,8 +19,17 @@ public class Pop : MonoBehaviour
     {
         if(collision.name == "Player")
         {
+            EndThinking();
             animator.SetBool("Thinking", false);
             animator.SetBool("Up", false);
+            if(transform.parent.name == "Cage") {
+                HideHelp();
+            }
+            if (transform.name == "Door_m")
+            {
+                Debug.Log("A");
+                HideKey();
+            }
         }
     }
 
@@ -32,5 +41,24 @@ public class Pop : MonoBehaviour
     public void EndThinking()
     {
         animator.SetBool("Thinking", false);
+    }
+
+    public void ShowHelp()
+    {
+        transform.Find("Help").gameObject.SetActive(true);
+        //transform.Find("Key").gameObject.SetActive(true);
+    }
+    public void HideHelp()
+    {
+        transform.Find("Help").gameObject.SetActive(false);
+        //transform.Find("Key").gameObject.SetActive(true);
+    }
+    public void ShowKey()
+    {
+        transform.Find("Key").gameObject.SetActive(true);
+    }
+    public void HideKey()
+    {
+        transform.Find("Key").gameObject.SetActive(false);
     }
 }
