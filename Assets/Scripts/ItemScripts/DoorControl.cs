@@ -12,14 +12,30 @@ public class DoorControl : MonoBehaviour
     {
         if (doorIsTriggered)
         {
-            player.SetActive(false);
-            door.SetBool("Open", true);
+            if (transform.name == "Door_m" && player.transform.GetComponent<PlayerController>().withKey)
+            {
+                player.SetActive(false);
+                door.SetBool("Open", true);
+            }
+            if(transform.name == "Door")
+            {
+                player.SetActive(false);
+                door.SetBool("Open", true);
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.name == "Player")
+        {
+            doorIsTriggered = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.name == "Player")
         {
             doorIsTriggered = true;
         }

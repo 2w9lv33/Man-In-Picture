@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform interactivePoint;
     [SerializeField] private Texture2D mouseCursor;
     [SerializeField] public bool canBeSeen = true;
+    [SerializeField] public bool withKey = false;
 
     private Rigidbody2D player_Rigidbody2D;
     private bool player_FacingRight = true;

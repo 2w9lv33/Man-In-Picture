@@ -8,7 +8,8 @@ namespace Game
     {
         [SerializeField] public bool canBeGet = true;
         [SerializeField] public bool canBeSet = true;
-        public enum MyColor { WALL, HASCOLOR, NOCOLOR, BLACK };
+        [SerializeField] private bool _same = false;
+        public enum MyColor { WALL, HASCOLOR, NOCOLOR, BLACK ,BLUE,RED,YELLOW };
         [SerializeField] private MyColor _myColor = MyColor.NOCOLOR;
         [SerializeField] private MyColor _checkColor = MyColor.NOCOLOR;
 
@@ -33,6 +34,32 @@ namespace Game
                 return _checkColor;
             }
             set { }
+        }
+
+        //if is same
+        public bool same
+        {
+            get
+            {
+                return _same;
+            }
+
+            set
+            {
+                _same = value;
+            }
+        }
+
+        private void Update()
+        {
+            if(_myColor == _checkColor)
+            {
+                same = true;
+            }
+            else
+            {
+                same = false;
+            }
         }
     }
 }

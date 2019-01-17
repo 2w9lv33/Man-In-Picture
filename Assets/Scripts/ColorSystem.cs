@@ -19,6 +19,7 @@ public class ColorSystem : MonoBehaviour
         animator.SetBool("Use", false);
         if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using"))
         {
+            Debug.Log("MouseDown");
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             animator.SetBool("Use", true);
             GetColor(mousePosition);
