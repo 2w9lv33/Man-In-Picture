@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Texture2D mouseCursor;
     [SerializeField] public bool canBeSeen = true;
     [SerializeField] public bool withKey = false;
+    [SerializeField] public bool awakeEnemy = false;
 
     private Rigidbody2D player_Rigidbody2D;
     private bool player_FacingRight = true;

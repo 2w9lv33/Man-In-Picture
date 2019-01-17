@@ -23,6 +23,11 @@ public class DoorControl : MonoBehaviour
                 door.SetBool("Open", true);
             }
         }
+        if (transform.name == "Door_E" && player.transform.GetComponent<PlayerController>().awakeEnemy)
+        {
+            door.SetBool("Open", true);
+            player.transform.GetComponent<PlayerController>().awakeEnemy = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,6 +44,11 @@ public class DoorControl : MonoBehaviour
         {
             doorIsTriggered = true;
         }
+    }
+
+    public void AwakeEnemy()
+    {
+        GameObject.FindGameObjectWithTag("Enemy").SetActive(true);
     }
 
     public void FinishOpen()
