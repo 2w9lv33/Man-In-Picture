@@ -21,6 +21,14 @@ public class PlayerController : MonoBehaviour
         player_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ChangePlayer(1);
+        }
+    }
+
     //walk
     public void Move(float move)
     {

@@ -30,15 +30,14 @@ public class ColorSystem : MonoBehaviour
             animator.SetBool("Use", true);
             SetColor(mousePosition);
         }
-        //Player.GetComponent<Game.Color>().myColor == Game.Color.MyColor.WALL
-        if (Input.GetKeyDown(KeyCode.Q))
+        if(player.GetComponent<Game.Color>().myColor == Game.Color.MyColor.WALL)
         {
             Hide();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else
         {
             UnHide();
-        }
+        }       
     }
 
     //set color

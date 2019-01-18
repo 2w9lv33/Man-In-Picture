@@ -16,17 +16,30 @@ public class Enemy : MonoBehaviour
     private int toPlayer = 0;
     private bool needCheck = true;
 
+    private IEnumerator WaitToLeave(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Leave();
+    }
+
     private void Awake()
     {
         enemy_Rigidbody2D = GetComponent<Rigidbody2D>();
+        checkPoint = new Vector3(8, 0, 0);
     }
+
+    private void Start()
+    {
+        StartCoroutine(WaitToLeave(10f));
+    }
+
     // Update is called once per frame
     void Update()
     {
         FindPlayer();
         if (needCheck)
         {
-            CheckRoom(checkPoint);
+            GoTo(checkPoint);
         }
     }
 
@@ -56,41 +69,41 @@ public class Enemy : MonoBehaviour
 
     private void FindPlayer()
     {
-        if(player.transform.position.x > transform.position.x)
+        if (player.GetComponent<PlayerController>().canBeSeen)
         {
-            if (player.GetComponent<PlayerController>().canBeSeen)
-            {
-                toPlayer = -1;
-                needCheck = false;
-            }
-            else { needCheck = true; }
-        }
-        else
-        {
-            if (player.GetComponent<PlayerController>().canBeSeen)
-            {
-                toPlayer = 1;
-                needCheck = false;
-            }
-            else { needCheck = true; }
+            needCheck = false;
+            GoTo(player.transform.position);
         }
     }
 
-    public void CheckRoom(Vector3 Position)
+    public void GoTo(Vector3 Position)
     {
-        if (transform.position.x - Position.x > 0.2f)
+        if (transform.position.x - Position.x > 1f)
         {
             Debug.Log("NeedCheck");
             Move(Speed * -1);
         }
-        if(transform.position.x - Position.x < 0.2f)
+        if(transform.position.x - Position.x < -1f)
         {
             Move(Speed * 1);
+        }
+        if(Mathf.Abs(transform.position.x - Position.x) < 0.05f)
+        {
+            Move(0f);
         }
     }
 
     public void Leave()
     {
+        needCheck = true;
+        checkPoint = new Vector3(30, 5, 5);
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.name == "Door")
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
