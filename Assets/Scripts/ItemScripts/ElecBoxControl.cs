@@ -7,17 +7,24 @@ public class ElecBoxControl : MonoBehaviour
 {
     public Canvas Canvas;
     public Game.Color Color;
-    public Animation Animation;
+    public Animator Door;
+    public Animator Electric;
+    public GameObject room;
+    public GameObject Enemy;
 
     private void Update()
     {
         if(Color.myColor == Game.Color.MyColor.BLACK)
         {
-            Animation.Stop();
+            Electric.SetBool("Play",false);
+            room.transform.Find("Room_2").gameObject.SetActive(true);
+            Door.SetBool("Open", true);
+            Enemy.SetActive(true);
+            //Canvas.gameObject.SetActive(false);
         }
         else
         {
-            Animation.Play();
+            Electric.SetBool("Play", true);
         }
     }
 

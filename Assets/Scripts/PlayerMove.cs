@@ -44,4 +44,9 @@ public class PlayerMove : MonoBehaviour
     {
         animator.SetBool("Die", false);
     }
+
+    public void SetGetFalse()
+    {
+        animator.SetBool("Get", false);
+    }
 }

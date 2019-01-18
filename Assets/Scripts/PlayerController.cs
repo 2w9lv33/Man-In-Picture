@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         this.transform.localScale = playerScale;
     }
 
-    private void ChangePlayer(int type)
+    public  void ChangePlayer(int type)
     {
         switch (type)
         {

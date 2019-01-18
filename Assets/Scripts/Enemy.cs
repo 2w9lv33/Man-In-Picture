@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     private bool needCheck = true;
     private bool needAttack = false;
 
+    private bool hasAttacked = false;
+
     private IEnumerator WaitToLeave(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -119,7 +121,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Player")
+        if(collision.name == "Player" && !hasAttacked)
         {
             needCheck = false;
             needAttack = true;
@@ -128,6 +130,8 @@ public class Enemy : MonoBehaviour
             animator2.SetBool("Attack", true);
             animator1.SetFloat("Speed", -0.5f);
             animator2.SetFloat("Speed", -0.5f);
+            hasAttacked = true;
+            Invoke("Leave", 2f);
         }
     }
 
