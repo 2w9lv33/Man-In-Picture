@@ -123,11 +123,11 @@ public class Enemy : MonoBehaviour
         {
             needCheck = false;
             needAttack = true;
+            transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             animator1.SetBool("Attack", true);
             animator2.SetBool("Attack", true);
             animator1.SetFloat("Speed", -0.5f);
             animator2.SetFloat("Speed", -0.5f);
-            GameObject.Instantiate(prefab,transform.Find("ammo").transform.position, transform.Find("ammo").transform.rotation);
         }
     }
 
@@ -143,5 +143,10 @@ public class Enemy : MonoBehaviour
     {
         animator1.SetBool("Attack", false);
         animator2.SetBool("Attack", false);
+    }
+
+    public void Attack()
+    {
+        GameObject.Instantiate(prefab, transform.Find("ammo").transform.position, transform.Find("ammo").transform.rotation);
     }
 }

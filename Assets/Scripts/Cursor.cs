@@ -7,7 +7,7 @@ public class Cursor : MonoBehaviour
     private Vector3 position;
     private void Start()
     {
-        UnityEngine.Cursor.visible = false;
+        //UnityEngine.Cursor.visible = false;
     }
     void Update()
     {

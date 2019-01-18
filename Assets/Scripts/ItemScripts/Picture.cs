@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Picture : MonoBehaviour
 {
@@ -20,13 +21,16 @@ public class Picture : MonoBehaviour
         switch (myColor)
         {
             case Game.Color.MyColor.RED:
-                transform.GetComponent<SpriteRenderer>().color = UnityEngine.Color.red;
+                transform.GetComponent<Image>().color = UnityEngine.Color.red;
                 break;
             case Game.Color.MyColor.BLUE:
-                transform.GetComponent<SpriteRenderer>().color = UnityEngine.Color.blue;
+                transform.GetComponent<Image>().color = UnityEngine.Color.blue;
                 break;
             case Game.Color.MyColor.YELLOW:
-                transform.GetComponent<SpriteRenderer>().color = UnityEngine.Color.yellow;
+                transform.GetComponent<Image>().color = UnityEngine.Color.yellow;
+                break;
+            case Game.Color.MyColor.BLACK:
+                transform.GetComponent<Image>().color = UnityEngine.Color.gray;
                 break;
             default:
                 break;

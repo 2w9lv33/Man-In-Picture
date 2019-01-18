@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ColorSystem : MonoBehaviour
@@ -12,7 +13,7 @@ public class ColorSystem : MonoBehaviour
     public Text text;
     private Vector3 mousePosition;
     //Player's Palette
-    [SerializeField] private Game.Color.MyColor palette;
+    [SerializeField] public Game.Color.MyColor palette;
 
     private void Update()
     {
@@ -88,4 +89,5 @@ public class ColorSystem : MonoBehaviour
         player.GetComponent<SpriteRenderer>().color = color;
         PlayerController.canBeSeen = true;
     }
+
 }

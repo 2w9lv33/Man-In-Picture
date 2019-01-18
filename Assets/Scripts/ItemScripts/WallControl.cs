@@ -7,6 +7,7 @@ public class WallControl : MonoBehaviour
     [SerializeField] private bool flag = false;
     public Game.Color[] pictures;
     public Animator animator;
+    public Canvas Canvas;
     
     void Update()
     {
@@ -15,6 +16,8 @@ public class WallControl : MonoBehaviour
         if (flag)
         {
             animator.SetBool("Open", true);
+            Canvas.transform.Find("BOOK").gameObject.SetActive(false);
+            Canvas.gameObject.SetActive(false);
         }
     }
 
@@ -26,9 +29,25 @@ public class WallControl : MonoBehaviour
 
     public void CheckColor()
     {
-        if (pictures[0].same && pictures[1].same && pictures[2].same)
+        if (pictures[0].same && pictures[1].same && pictures[2].same && pictures[3].same)
         {
             flag = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.name == "Player")
+        {
+            Canvas.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.name == "Player")
+        {
+            Canvas.gameObject.SetActive(false);
         }
     }
 }
