@@ -13,8 +13,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector3 checkPoint = Vector3.zero;
     [SerializeField] private float Speed = 3f;
 
+    public Transform prefab;
+
+    public Animator animator1, animator2;
+
     private int toPlayer = 0;
     private bool needCheck = true;
+    private bool needAttack = false;
 
     private IEnumerator WaitToLeave(float seconds)
     {
@@ -36,7 +41,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FindPlayer();
+        if (!needAttack)
+        {
+            FindPlayer();
+        }
         if (needCheck)
         {
             GoTo(checkPoint);
@@ -74,21 +82,31 @@ public class Enemy : MonoBehaviour
             needCheck = false;
             GoTo(player.transform.position);
         }
+        else
+        {
+            Invoke("Leave", 10f);
+        }
     }
 
     public void GoTo(Vector3 Position)
     {
-        if (transform.position.x - Position.x > 1f)
+        if (transform.position.x - Position.x > 0.5f)
         {
-            Debug.Log("NeedCheck");
+            animator1.SetFloat("Speed", 0.5f);
+            animator2.SetFloat("Speed", 0.5f);
             Move(Speed * -1);
         }
-        if(transform.position.x - Position.x < -1f)
+        if(transform.position.x - Position.x < -0.5f)
         {
+            animator1.SetFloat("Speed", 0.5f);
+            animator2.SetFloat("Speed", 0.5f);
             Move(Speed * 1);
         }
         if(Mathf.Abs(transform.position.x - Position.x) < 0.05f)
         {
+            Debug.Log("s");
+            animator1.SetFloat("Speed", -0.5f);
+            animator2.SetFloat("Speed", -0.5f);
             Move(0f);
         }
     }
@@ -101,9 +119,29 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Door")
+        if(collision.name == "Player")
+        {
+            needCheck = false;
+            needAttack = true;
+            animator1.SetBool("Attack", true);
+            animator2.SetBool("Attack", true);
+            animator1.SetFloat("Speed", -0.5f);
+            animator2.SetFloat("Speed", -0.5f);
+            GameObject.Instantiate(prefab,transform.Find("ammo").transform.position, transform.Find("ammo").transform.rotation);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.name == "Door")
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void SetAttackFalse()
+    {
+        animator1.SetBool("Attack", false);
+        animator2.SetBool("Attack", false);
     }
 }

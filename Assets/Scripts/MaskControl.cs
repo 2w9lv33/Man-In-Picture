@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaskControl : MonoBehaviour
 {
-    private void OnEnable()
+    private void Update()
     {
         this.GetComponent<SpriteMask>().sprite = this.GetComponent<SpriteRenderer>().sprite;
     }

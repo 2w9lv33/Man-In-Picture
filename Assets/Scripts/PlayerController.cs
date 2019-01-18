@@ -111,4 +111,5 @@ public class PlayerController : MonoBehaviour
             this.transform.Find("shadeLeft").gameObject.SetActive(false);
         }
     }
+
 }

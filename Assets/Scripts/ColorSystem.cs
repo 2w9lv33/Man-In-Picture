@@ -36,7 +36,7 @@ public class ColorSystem : MonoBehaviour
         }
         else
         {
-            UnHide();
+            //UnHide();
         }       
     }
 

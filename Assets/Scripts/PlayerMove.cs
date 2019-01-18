@@ -40,4 +40,8 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("Start!");
     }
 
+    public void SetDieFalse()
+    {
+        animator.SetBool("Die", false);
+    }
 }
