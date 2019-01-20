@@ -33,7 +33,10 @@ namespace Game
             {
                 return _checkColor;
             }
-            set { }
+            set
+            {
+                _checkColor = value;
+            }
         }
 
         //if is same

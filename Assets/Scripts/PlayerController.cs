@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
             case 1:
                 transform.GetComponent<Animator>().SetLayerWeight(0, 0f);
                 transform.GetComponent<Animator>().SetLayerWeight(1, 1f);
+                withKey = true;
                 break;
             case 2:
                 transform.GetComponent<Animator>().SetLayerWeight(0, 1f);

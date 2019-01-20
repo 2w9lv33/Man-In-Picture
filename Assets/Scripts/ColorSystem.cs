@@ -18,14 +18,14 @@ public class ColorSystem : MonoBehaviour
     private void Update()
     {
         animator.SetBool("Use", false);
-        if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using"))
+        if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using") && !animator.GetBool("Get"))
         {
             Debug.Log("MouseDown");
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             animator.SetBool("Use", true);
             GetColor(mousePosition);
         }
-        if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using"))
+        if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using") && !animator.GetBool("Get"))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             animator.SetBool("Use", true);

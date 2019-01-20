@@ -25,6 +25,7 @@ public class CageControl : MonoBehaviour
             cage2.SetBool("Save", true);
             SpriteMask.enabled = true;
             Player.GetComponent<Animator>().SetBool("Get",true);
+            color.checkColor = Game.Color.MyColor.NOCOLOR;
         }
     }
 

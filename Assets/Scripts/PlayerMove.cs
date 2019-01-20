@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!animator.GetBool("Using"))
+        if (!animator.GetBool("Using") && !animator.GetBool("Get"))
         {
             playerController.Move(moveVelocity);
         }
