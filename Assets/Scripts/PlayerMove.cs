@@ -43,10 +43,16 @@ public class PlayerMove : MonoBehaviour
     public void SetDieFalse()
     {
         animator.SetBool("Die", false);
+        playerController.canMove = false;
     }
 
     public void SetGetFalse()
     {
         animator.SetBool("Get", false);
+    }
+
+    public void LoadFirstScene()
+    {
+        AsynLoad.LoadSceneAsync("FirstScene");
     }
 }

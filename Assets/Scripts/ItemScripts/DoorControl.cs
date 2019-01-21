@@ -6,7 +6,7 @@ public class DoorControl : MonoBehaviour
 {
     public GameObject player;
     public Animator door;
-    [SerializeField] private bool doorIsTriggered;
+    [SerializeField] private bool doorIsTriggered = false;
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class DoorControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == "Player")
+        if(collision.gameObject.name == "Player" && transform.name == "Door_m")
         {
             doorIsTriggered = true;
         }
@@ -40,7 +40,7 @@ public class DoorControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Player")
+        if (collision.name == "Player" && transform.name == "Door_T")
         {
             doorIsTriggered = true;
         }

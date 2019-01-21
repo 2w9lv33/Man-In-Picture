@@ -14,18 +14,19 @@ public class ColorSystem : MonoBehaviour
     private Vector3 mousePosition;
     //Player's Palette
     [SerializeField] public Game.Color.MyColor palette;
+    public Image UI;
 
     private void Update()
     {
         animator.SetBool("Use", false);
-        if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using") && !animator.GetBool("Get"))
+        if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove)
         {
             Debug.Log("MouseDown");
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             animator.SetBool("Use", true);
             GetColor(mousePosition);
         }
-        if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using") && !animator.GetBool("Get"))
+        if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             animator.SetBool("Use", true);
@@ -68,10 +69,34 @@ public class ColorSystem : MonoBehaviour
             {
                 palette = hit.transform.GetComponent<Game.Color>().myColor;
                 text.text = palette.ToString();
+                ChangeUI(palette);
             }
         }
     }
 
+    public void ChangeUI(Game.Color.MyColor myColor)
+    {
+        switch (myColor)
+        {
+            case Game.Color.MyColor.RED:
+                UI.color = UnityEngine.Color.red;
+                break;
+            case Game.Color.MyColor.WALL:
+                UI.color = UnityEngine.Color.cyan;
+                break;
+            case Game.Color.MyColor.BLUE:
+                UI.color = UnityEngine.Color.blue;
+                break;
+            case Game.Color.MyColor.YELLOW:
+                UI.color = UnityEngine.Color.yellow;
+                break;
+            case Game.Color.MyColor.BLACK:
+                UI.color = UnityEngine.Color.gray;
+                break;
+            default:
+                break;
+        }
+    }
 
     //hide!
     private void Hide()

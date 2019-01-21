@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform interactivePoint;
     [SerializeField] private Texture2D mouseCursor;
     [SerializeField] public bool canBeSeen = true;
+    [SerializeField] public bool canMove = true;
     [SerializeField] public bool withKey = false;
     [SerializeField] public bool awakeEnemy = false;
 
@@ -32,16 +33,19 @@ public class PlayerController : MonoBehaviour
     //walk
     public void Move(float move)
     {
-        if(move > 0 && !player_FacingRight)
+        if (canMove)
         {
-            Flip();
+            if (move > 0 && !player_FacingRight)
+            {
+                Flip();
+            }
+            else if (move < 0 && player_FacingRight)
+            {
+                Flip();
+            }
+            Vector3 targetVelocity = new Vector2(move, player_Rigidbody2D.velocity.y);
+            player_Rigidbody2D.velocity = Vector3.SmoothDamp(player_Rigidbody2D.velocity, targetVelocity, ref player_Velocity, movementSmooth);
         }
-        else if (move < 0 && player_FacingRight)
-        {
-            Flip();
-        }
-        Vector3 targetVelocity = new Vector2(move, player_Rigidbody2D.velocity.y);
-        player_Rigidbody2D.velocity = Vector3.SmoothDamp(player_Rigidbody2D.velocity, targetVelocity, ref player_Velocity, movementSmooth);
     }
 
     //flip player
@@ -113,4 +117,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.name == "Enemy_1")
+        {
+            transform.GetComponent<Animator>().SetBool("Die", true);
+        }
+    }
 }

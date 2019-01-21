@@ -14,11 +14,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float Speed = 3f;
 
     public Transform prefab;
-
+    public Vector3 targetVelocity = new Vector3(1, 0, 0);
     public Animator animator1, animator2;
 
     private int toPlayer = 0;
-    private bool needCheck = true;
+    public bool needCheck = true;
     private bool needAttack = false;
 
     private bool hasAttacked = false;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        enemy_Rigidbody2D = GetComponent<Rigidbody2D>();
+        //enemy_Rigidbody2D = GetComponent<Rigidbody2D>();
         checkPoint = new Vector3(8, 0, 0);
     }
 
@@ -51,6 +51,13 @@ public class Enemy : MonoBehaviour
         {
             GoTo(checkPoint);
         }
+        if (Mathf.Abs(transform.position.x - checkPoint.x) < 0.6f)
+        {
+            needCheck = false;
+            animator1.SetFloat("Speed", -0.5f);
+            animator2.SetFloat("Speed", -0.5f);
+            Move(0f);
+        }
     }
 
     //walk
@@ -64,8 +71,11 @@ public class Enemy : MonoBehaviour
         {
             Flip();
         }
-        Vector3 targetVelocity = new Vector2(move, enemy_Rigidbody2D.velocity.y);
-        enemy_Rigidbody2D.velocity = Vector3.SmoothDamp(enemy_Rigidbody2D.velocity, targetVelocity, ref enemy_Velocity, movementSmooth);
+        Vector3 position = transform.position;
+        position += targetVelocity * move /100;
+        transform.position = position;
+        //Vector3 targetVelocity = new Vector2(move, enemy_Rigidbody2D.velocity.y);
+        //enemy_Rigidbody2D.velocity = Vector3.SmoothDamp(enemy_Rigidbody2D.velocity, targetVelocity, ref enemy_Velocity, movementSmooth);
     }
 
     //flip player
@@ -104,28 +114,22 @@ public class Enemy : MonoBehaviour
             animator2.SetFloat("Speed", 0.5f);
             Move(Speed * 1);
         }
-        if(Mathf.Abs(transform.position.x - Position.x) < 0.05f)
-        {
-            Debug.Log("s");
-            animator1.SetFloat("Speed", -0.5f);
-            animator2.SetFloat("Speed", -0.5f);
-            Move(0f);
-        }
     }
 
     public void Leave()
     {
         needCheck = true;
+        targetVelocity = new Vector3(1,0,0);
         checkPoint = new Vector3(30, 5, 5);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Player" && !hasAttacked)
+        if(collision.name == "Player" && !hasAttacked && collision.GetComponent<PlayerController>().canBeSeen)
         {
             needCheck = false;
             needAttack = true;
-            transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            targetVelocity = Vector3.zero;
             animator1.SetBool("Attack", true);
             animator2.SetBool("Attack", true);
             animator1.SetFloat("Speed", -0.5f);
