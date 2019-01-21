@@ -19,15 +19,25 @@ public class ElecBoxControl : MonoBehaviour
         {
             Electric.SetBool("Play",false);
             room.transform.Find("Room_2").gameObject.SetActive(true);
-            Door.SetBool("Open", true);
-            Enemy.SetActive(true);
+            Invoke("AwakeEnemy", 3f);
+            Invoke("OpenDoor", 1f);
             collider.enabled = false;
-    //Canvas.gameObject.SetActive(false);
-}
+            //Canvas.gameObject.SetActive(false);
+        }
         else
         {
             Electric.SetBool("Play", true);
         }
+    }
+
+    public void AwakeEnemy()
+    { 
+        Enemy.SetActive(true);
+    }
+
+    public void OpenDoor()
+    {
+        Door.SetBool("Open", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

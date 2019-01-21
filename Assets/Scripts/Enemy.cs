@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public Transform prefab;
     public Vector3 targetVelocity = new Vector3(1, 0, 0);
     public Animator animator1, animator2;
+    public GameObject door;
 
     private int toPlayer = 0;
     public bool needCheck = true;
@@ -57,6 +58,11 @@ public class Enemy : MonoBehaviour
             animator1.SetFloat("Speed", -0.5f);
             animator2.SetFloat("Speed", -0.5f);
             Move(0f);
+        }
+        if(transform.position.x > door.transform.position.x)
+        {
+            //gameObject.SetActive(false);
+            door.transform.GetComponent<Animator>().SetBool("Open", false);
         }
     }
 
