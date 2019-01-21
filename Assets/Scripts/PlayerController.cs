@@ -24,10 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ChangePlayer(1);
-        }
+
     }
 
     //walk
@@ -73,55 +70,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //show shadow
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Light")
-        {
-            if (collision.gameObject.transform.position.x > this.transform.position.x)
-            {
-                if (player_FacingRight)
-                {
-                    this.transform.Find("shadeRight").gameObject.SetActive(false);
-                    this.transform.Find("shadeLeft").gameObject.SetActive(true);
-                }
-                else
-                {
-                    this.transform.Find("shadeLeft").gameObject.SetActive(false);
-                    this.transform.Find("shadeRight").gameObject.SetActive(true);
-                }
-            }
-            else
-            {
-                if (player_FacingRight)
-                {
-                    this.transform.Find("shadeRight").gameObject.SetActive(true);
-                    this.transform.Find("shadeLeft").gameObject.SetActive(false);
-                }
-                else
-                {
-                    this.transform.Find("shadeLeft").gameObject.SetActive(true);
-                    this.transform.Find("shadeRight").gameObject.SetActive(false);
-                }
-            }
-        }
-    }
-
-    //close shadow
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.tag == "Light")
-        {
-            this.transform.Find("shadeRight").gameObject.SetActive(false);
-            this.transform.Find("shadeLeft").gameObject.SetActive(false);
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.name == "Enemy_1")
         {
             transform.GetComponent<Animator>().SetBool("Die", true);
         }
+    }
+
+    public void SetMoveTrue()
+    {
+        canMove = true;
     }
 }

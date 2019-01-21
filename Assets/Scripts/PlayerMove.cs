@@ -7,12 +7,22 @@ public class PlayerMove : MonoBehaviour
     public PlayerController playerController;
     public Animator animator;
     [SerializeField] private float playerSpeed = 10f;
-    private float moveVelocity = 0f; 
+    public float moveVelocity = 0f;
+    public Vector3 mousePosition = Vector3.zero;
 
-	void Update () {
-        moveVelocity = Input.GetAxisRaw("Horizontal") * playerSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(moveVelocity));
-	}
+    void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            moveVelocity = (mousePosition.x > transform.position.x ? 1 : -1) * playerSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(moveVelocity));
+        }
+        if (Mathf.Abs(mousePosition.x - transform.position.x) < 0.1f && playerController.canMove)
+        {
+            animator.SetFloat("Speed", -5f);
+            moveVelocity = 0f;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -27,17 +37,30 @@ public class PlayerMove : MonoBehaviour
     }
 
     //set flag finish
-    public void FinishUseAbility()
+    public void SetUseFalse()
     {
-        animator.SetBool("Using", false);
-        Debug.Log("Finish!");
+        animator.SetBool("Use", false);
+        //Debug.Log("Finish!");
     }
 
     //set flag start
-    public void StartUseAbility()
+    public void SetUseTrue()
+    {
+        animator.SetBool("Use", true);
+        //Debug.Log("Start!");
+    }
+
+    public void SetUsingFalse()
+    {
+        animator.SetBool("Using", false);
+        //Debug.Log("Finish!");
+    }
+
+    //set flag start
+    public void SetUsingTrue()
     {
         animator.SetBool("Using", true);
-        Debug.Log("Start!");
+        //Debug.Log("Start!");
     }
 
     public void SetDieFalse()

@@ -452,9 +452,8 @@ MonoBehaviour:
   player: {fileID: 1936664644}
   PlayerController: {fileID: 1936664649}
   animator: {fileID: 1936664645}
-  text: {fileID: 362897006}
+  Use: 0
   palette: 2
-  UI: {fileID: 845639541}
 --- !u!4 &276511484
 Transform:
   m_ObjectHideFlags: 0
@@ -2711,6 +2710,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3177845147797642665, guid: 34a0fadca3c0e914eb7a1ef2c6cbf04c,
+        type: 3}
+      propertyPath: canBeSeen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8920294134139120675, guid: 34a0fadca3c0e914eb7a1ef2c6cbf04c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2806,11 +2810,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e15a4de649d0ccf48b3945bbcad68f74, type: 2}
-    - target: {fileID: 3177845147797642665, guid: 34a0fadca3c0e914eb7a1ef2c6cbf04c,
-        type: 3}
-      propertyPath: canBeSeen
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a0fadca3c0e914eb7a1ef2c6cbf04c, type: 3}
 --- !u!1 &1103145399
@@ -4538,8 +4537,6 @@ GameObject:
   - component: {fileID: 1959913806}
   - component: {fileID: 1959913802}
   - component: {fileID: 1959913801}
-  - component: {fileID: 1959913803}
-  - component: {fileID: 1959913804}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -4599,35 +4596,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5469627, y: 10.516304}
   m_EdgeRadius: 0
---- !u!114 &1959913803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959913797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d664793a77a8a4097a7662f21aa153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeGet: 1
-  canBeSet: 1
-  _same: 0
-  _myColor: 2
-  _checkColor: 3
---- !u!114 &1959913804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959913797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3f6084368556e54db3cc31c2f6267d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1959913806
 BoxCollider2D:
   m_ObjectHideFlags: 0

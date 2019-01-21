@@ -10,51 +10,65 @@ public class ColorSystem : MonoBehaviour
     public GameObject player;
     public PlayerController PlayerController;
     public Animator animator;
-    public Text text;
     private Vector3 mousePosition;
-    //Player's Palette
+    [SerializeField]private bool Use = false;
     [SerializeField] public Game.Color.MyColor palette;
-    public Image UI;
 
     private void Update()
     {
-        animator.SetBool("Use", false);
-        if (Input.GetMouseButtonDown(1) && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove)
+        //animator.SetBool("Use", false);
+
+        if(palette == Game.Color.MyColor.NOCOLOR)
         {
-            Debug.Log("MouseDown");
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            animator.SetBool("Use", true);
-            GetColor(mousePosition);
-        }
-        if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove)
-        {
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            animator.SetBool("Use", true);
-            SetColor(mousePosition);
-        }
-        if(player.GetComponent<Game.Color>().myColor == Game.Color.MyColor.WALL)
-        {
-            Hide();
+            if (Input.GetMouseButtonDown(0)/* && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove*/)
+            {
+                //Debug.Log("MouseDown");
+                Use = true;
+                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Debug.Log(mousePosition);
+            }
+            if (Mathf.Abs(player.transform.position.x - mousePosition.x) < 1f && Use)
+            {
+                Debug.Log("Get");
+                GetColor(mousePosition);
+                Use = false;
+                player.GetComponent<PlayerMove>().moveVelocity = 0f;
+                animator.SetFloat("Speed", -5f);
+            }
         }
         else
         {
-            //UnHide();
-        }       
+            if (Input.GetMouseButtonDown(0) && !animator.GetBool("Using") && !animator.GetBool("Get") && PlayerController.canMove)
+            {
+                Debug.Log("Set");
+                Use = true;
+                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            if (Mathf.Abs(player.transform.position.x - mousePosition.x) < 1f && Use)
+            {
+                SetColor(mousePosition);
+                Use = false;
+                player.GetComponent<PlayerMove>().moveVelocity = 0f;
+                animator.SetFloat("Speed", -5f);
+            }
+        }  
     }
 
     //set color
     private void SetColor(Vector3 mousePosition)
     {
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        Debug.Log("hit");
         if (hit.collider != null)
         {
-            Debug.Log(hit.transform.name);
-            if (hit.transform.GetComponent<Game.Color>().canBeSet && palette != Game.Color.MyColor.NOCOLOR)
+            //Debug.Log(hit.transform.name);
+            if (hit.transform.tag == "Item" && hit.transform.GetComponent<Game.Color>().canBeSet && palette != Game.Color.MyColor.NOCOLOR)
             {
+                PlayerController.canMove = false;
+                animator.SetBool("Use", true);
                 hit.transform.GetComponent<Game.Color>().myColor = palette;
+                palette = Game.Color.MyColor.NOCOLOR;
+                ChangePlayerColor(palette);
             }
-            //text.text = palette.ToString();
         }
     }
 
@@ -65,33 +79,37 @@ public class ColorSystem : MonoBehaviour
         if(hit.collider != null)
         {
             Debug.Log(hit.transform.name);
-            if (hit.transform.GetComponent<Game.Color>().canBeGet)
+            if (hit.transform.tag == "Item" && hit.transform.GetComponent<Game.Color>().canBeGet)
             {
+                PlayerController.canMove = false;
+                animator.SetBool("Use", true);
                 palette = hit.transform.GetComponent<Game.Color>().myColor;
-                text.text = palette.ToString();
-                ChangeUI(palette);
+                ChangePlayerColor(palette);
             }
         }
     }
 
-    public void ChangeUI(Game.Color.MyColor myColor)
+    public void ChangePlayerColor(Game.Color.MyColor myColor)
     {
         switch (myColor)
         {
             case Game.Color.MyColor.RED:
-                UI.color = UnityEngine.Color.red;
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.red;
                 break;
             case Game.Color.MyColor.WALL:
-                UI.color = UnityEngine.Color.cyan;
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.cyan;
                 break;
             case Game.Color.MyColor.BLUE:
-                UI.color = UnityEngine.Color.blue;
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.blue;
                 break;
             case Game.Color.MyColor.YELLOW:
-                UI.color = UnityEngine.Color.yellow;
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.yellow;
                 break;
             case Game.Color.MyColor.BLACK:
-                UI.color = UnityEngine.Color.gray;
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.gray;
+                break;
+            case Game.Color.MyColor.NOCOLOR:
+                player.GetComponent<SpriteRenderer>().color = UnityEngine.Color.white;
                 break;
             default:
                 break;
