@@ -11,6 +11,7 @@ public class ElecBoxControl : MonoBehaviour
     public Animator Electric;
     public GameObject room;
     public GameObject Enemy;
+    public Collider2D collider;
 
     private void Update()
     {
@@ -20,8 +21,9 @@ public class ElecBoxControl : MonoBehaviour
             room.transform.Find("Room_2").gameObject.SetActive(true);
             Door.SetBool("Open", true);
             Enemy.SetActive(true);
-            //Canvas.gameObject.SetActive(false);
-        }
+            collider.enabled = false;
+    //Canvas.gameObject.SetActive(false);
+}
         else
         {
             Electric.SetBool("Play", true);

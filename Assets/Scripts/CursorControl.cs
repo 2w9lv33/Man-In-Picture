@@ -21,7 +21,6 @@ public class CursorControl : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (hit.collider != null)
         {
-            Debug.Log(hit.transform.name);
             if (hit.transform.tag == "Item")
             {
                 Cursor.SetCursor(cursorTexture_1, hotSpot, cursorMode);

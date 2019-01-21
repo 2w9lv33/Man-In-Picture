@@ -49,10 +49,16 @@ public class PlayerMove : MonoBehaviour
     public void SetGetFalse()
     {
         animator.SetBool("Get", false);
+        animator.SetBool("Using", true);
     }
 
     public void LoadFirstScene()
     {
         AsynLoad.LoadSceneAsync("FirstScene");
+    }
+
+    public void LoadSecondScene()
+    {
+        AsynLoad.LoadSceneAsync("SecondScene");
     }
 }

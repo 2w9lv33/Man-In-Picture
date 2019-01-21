@@ -144,6 +144,7 @@ public class Enemy : MonoBehaviour
         if(collision.transform.name == "Door")
         {
             gameObject.SetActive(false);
+            collision.transform.GetComponent<Animator>().SetBool("Open", false);
         }
     }
 

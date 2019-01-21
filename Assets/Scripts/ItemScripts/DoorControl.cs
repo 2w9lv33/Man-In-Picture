@@ -17,7 +17,7 @@ public class DoorControl : MonoBehaviour
                 player.SetActive(false);
                 door.SetBool("Open", true);
             }
-            if(transform.name == "Door")
+            if(transform.name == "Door_F")
             {
                 player.SetActive(false);
                 door.SetBool("Open", true);
@@ -33,6 +33,10 @@ public class DoorControl : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.name == "Player" && transform.name == "Door_m")
+        {
+            doorIsTriggered = true;
+        }
+        if (collision.gameObject.name == "Player" && transform.name == "Door_F")
         {
             doorIsTriggered = true;
         }
@@ -59,5 +63,10 @@ public class DoorControl : MonoBehaviour
     public void LoadFirstScene()
     {
         AsynLoad.LoadSceneAsync("FirstScene");
+    }
+
+    public void LoadSecondScene()
+    {
+        AsynLoad.LoadSceneAsync("SecondScene");
     }
 }
