@@ -23,6 +23,7 @@ public class CageControl : MonoBehaviour
         {
             cage1.SetBool("Save", true);
             cage2.SetBool("Save", true);
+            transform.Find("Pop").gameObject.SetActive(false);
             SpriteMask.enabled = true;
             Player.GetComponent<Animator>().SetBool("Get",true);
             color.checkColor = Game.Color.MyColor.NOCOLOR;
