@@ -37,6 +37,13 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        mousePosition = transform.position;
+        animator.SetFloat("Speed", -5f);
+        moveVelocity = 0f;
+    }
+
     //set flag finish
     public void SetUseFalse()
     {
