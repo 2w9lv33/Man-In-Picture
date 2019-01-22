@@ -34,7 +34,7 @@ public class TrapControl : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            if(playerColor.myColor != Game.Color.MyColor.WALL)
+            if(playerColor.myColor != Game.Color.MyColor.RED)
             {
                 flag = true;
             }

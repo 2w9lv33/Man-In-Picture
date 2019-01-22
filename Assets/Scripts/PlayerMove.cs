@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public PlayerController playerController;
+    public ColorSystem ColorSystem;
     public Animator animator;
     [SerializeField] private float playerSpeed = 10f;
     public float moveVelocity = 0f;
     public Vector3 mousePosition = Vector3.zero;
 
     void Update () {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !ColorSystem.IsUILayer)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moveVelocity = (mousePosition.x > transform.position.x ? 1 : -1) * playerSpeed;
@@ -40,6 +41,8 @@ public class PlayerMove : MonoBehaviour
     public void SetUseFalse()
     {
         animator.SetBool("Use", false);
+        animator.SetFloat("Speed", -5f);
+        moveVelocity = 0f;
         //Debug.Log("Finish!");
     }
 
@@ -53,7 +56,9 @@ public class PlayerMove : MonoBehaviour
     public void SetUsingFalse()
     {
         animator.SetBool("Using", false);
-        //Debug.Log("Finish!");
+        animator.SetFloat("Speed", -5f);
+        moveVelocity = 0f;
+        Debug.Log("Finish!");
     }
 
     //set flag start

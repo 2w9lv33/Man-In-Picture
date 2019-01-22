@@ -8,6 +8,7 @@ public class WallControl : MonoBehaviour
     public Game.Color[] pictures;
     public Animator animator;
     public Canvas Canvas;
+    public ColorSystem ColorSystem;
     
     void Update()
     {
@@ -15,6 +16,7 @@ public class WallControl : MonoBehaviour
         animator.SetBool("Open", false);
         if (flag)
         {
+            ColorSystem.IsUILayer = false;
             animator.SetBool("Open", true);
             Canvas.transform.Find("BOOK").gameObject.SetActive(false);
             Canvas.gameObject.SetActive(false);

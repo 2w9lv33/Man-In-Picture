@@ -11,7 +11,8 @@ public class ElecBoxControl : MonoBehaviour
     public Animator Electric;
     public GameObject room;
     public GameObject Enemy;
-    public Collider2D collider;
+    public ColorSystem ColorSystem;
+    public GameObject trap;
 
     private void Update()
     {
@@ -21,8 +22,9 @@ public class ElecBoxControl : MonoBehaviour
             room.transform.Find("Room_2").gameObject.SetActive(true);
             Invoke("AwakeEnemy", 3f);
             Invoke("OpenDoor", 1f);
-            collider.enabled = false;
-            //Canvas.gameObject.SetActive(false);
+            ColorSystem.IsUILayer = false;
+            trap.SetActive(false);
+            Canvas.gameObject.SetActive(false);
         }
         else
         {

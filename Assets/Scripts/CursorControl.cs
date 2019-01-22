@@ -8,6 +8,7 @@ public class CursorControl : MonoBehaviour
     public Texture2D cursorTexture_1;
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = Vector2.zero;
+    public ColorSystem ColorSystem;
     public Vector3 mousePosition;
 
     void Update()
@@ -23,16 +24,23 @@ public class CursorControl : MonoBehaviour
         {
             if (hit.transform.tag == "Item")
             {
-                Cursor.SetCursor(cursorTexture_1, hotSpot, cursorMode);
+                if(ColorSystem.palette != Game.Color.MyColor.NOCOLOR)
+                {
+                    Cursor.SetCursor(cursorTexture_1, hotSpot, cursorMode);
+                }
+                else
+                {
+                    Cursor.SetCursor(cursorTexture_0, hotSpot, cursorMode);
+                }
             }
             else
             {
-                Cursor.SetCursor(cursorTexture_0, hotSpot, cursorMode);
+                Cursor.SetCursor(null, hotSpot, cursorMode);
             }
         }
         else
         {
-            Cursor.SetCursor(cursorTexture_0, hotSpot, cursorMode);
-         }
+            Cursor.SetCursor(null, hotSpot, cursorMode);
+        }
     }
 }

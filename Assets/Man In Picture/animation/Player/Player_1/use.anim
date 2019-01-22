@@ -265,8 +265,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
-    functionName: SetUseFalse
+  - time: 2
+    functionName: SetMoveTrue
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -280,7 +280,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2
-    functionName: SetMoveTrue
+    functionName: SetUseFalse
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

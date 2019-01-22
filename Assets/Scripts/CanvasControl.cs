@@ -33,36 +33,42 @@ public class CanvasControl : MonoBehaviour
 
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         GetItem(mousePosition);
+        Click();
+    }
 
-        if (Input.GetMouseButtonDown(1))
-        { 
-            m_PointerEventData = new PointerEventData(m_EventSystem);
-            m_PointerEventData.position = Input.mousePosition;
-            List<RaycastResult> results = new List<RaycastResult>();
-            m_Raycaster.Raycast(m_PointerEventData, results);
-            if(results.Count > 0)
-            {
-               ColorSystem.palette = results[0].gameObject.GetComponent<Game.Color>().myColor;
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
+    public void Click()
+    {
+        if (ColorSystem.palette == Game.Color.MyColor.NOCOLOR)
         {
-            m_PointerEventData = new PointerEventData(m_EventSystem);
-            m_PointerEventData.position = Input.mousePosition;
-            List<RaycastResult> results = new List<RaycastResult>();
-            m_Raycaster.Raycast(m_PointerEventData, results);
-            if (results.Count > 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (ColorSystem.palette != Game.Color.MyColor.NOCOLOR)
+                m_PointerEventData = new PointerEventData(m_EventSystem);
+                m_PointerEventData.position = Input.mousePosition;
+                List<RaycastResult> results = new List<RaycastResult>();
+                m_Raycaster.Raycast(m_PointerEventData, results);
+                if (results.Count > 0)
                 {
-                    results[0].gameObject.GetComponent<Game.Color>().myColor = ColorSystem.palette;
+                    ColorSystem.palette = results[0].gameObject.GetComponent<Game.Color>().myColor;
                 }
             }
         }
-
-        ChangeUI(ColorSystem.palette);
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_PointerEventData = new PointerEventData(m_EventSystem);
+                m_PointerEventData.position = Input.mousePosition;
+                List<RaycastResult> results = new List<RaycastResult>();
+                m_Raycaster.Raycast(m_PointerEventData, results);
+                if (results.Count > 0)
+                {
+                    results[0].gameObject.GetComponent<Game.Color>().myColor = ColorSystem.palette;
+                    ColorSystem.palette = Game.Color.MyColor.NOCOLOR;
+                }
+            }
+        }
     }
+
 
     private void GetItem(Vector3 mousePosition)
     {
@@ -74,12 +80,26 @@ public class CanvasControl : MonoBehaviour
         {
             if (results[0].gameObject.tag == "Item")
             {
-                Cursor.SetCursor(cursorTexture_1, hotSpot, cursorMode);
+                Debug.Log(results[0].gameObject.name);
+                if (ColorSystem.palette != Game.Color.MyColor.NOCOLOR)
+                {
+                    Cursor.SetCursor(cursorTexture_1, hotSpot, cursorMode);
+                }
+                else
+                {
+                    Cursor.SetCursor(cursorTexture_0, hotSpot, cursorMode);
+                }
+                ColorSystem.IsUILayer = true;
             }
             else
             {
-                Cursor.SetCursor(cursorTexture_0, hotSpot, cursorMode);
+                Cursor.SetCursor(null, hotSpot, cursorMode);
+                ColorSystem.IsUILayer = true;
             }
+        }
+        else
+        {
+            ColorSystem.IsUILayer = false;
         }
     }
 

@@ -23,6 +23,9 @@ public class Picture : MonoBehaviour
             case Game.Color.MyColor.RED:
                 transform.GetComponent<Image>().color = UnityEngine.Color.red;
                 break;
+            case Game.Color.MyColor.WALL:
+                transform.GetComponent<Image>().color = UnityEngine.Color.cyan;
+                break;
             case Game.Color.MyColor.BLUE:
                 transform.GetComponent<Image>().color = UnityEngine.Color.blue;
                 break;
@@ -31,6 +34,9 @@ public class Picture : MonoBehaviour
                 break;
             case Game.Color.MyColor.BLACK:
                 transform.GetComponent<Image>().color = UnityEngine.Color.gray;
+                break;
+            case Game.Color.MyColor.NOCOLOR:
+                transform.GetComponent<Image>().color = UnityEngine.Color.white;
                 break;
             default:
                 break;
